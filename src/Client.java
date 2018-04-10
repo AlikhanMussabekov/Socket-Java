@@ -40,7 +40,8 @@ public class Client {
                     citizen = new Citizens(name, age);
                     //line = consoleIn.next();
 
-                    System.out.printf("Name: %s    Age: %d \n", citizen.getName(), citizen.getAge());
+                    System.out.printf("Name: %s - Age: %d \n", citizen.getName(), citizen.getAge());
+                    System.out.println(citizen.getDate());
 
                     out.writeObject(citizen);
                     out.flush();
