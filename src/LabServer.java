@@ -60,6 +60,7 @@ public class LabServer {
 
             System.out.println("Connected: " + socket.getInetAddress());
 
+
             try(InputStream in = socket.getInputStream();
                 ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream())
             ){
@@ -100,10 +101,11 @@ public class LabServer {
                                 parser.nextCommand(curCmd, curSet, stringJson);
                                 curSet.writeElements();
 
+                                new Thread (new CommandThread(curSet.returnObjects(),out)).start();
 
-                                out.writeObject(curSet.returnObjects());
+                                /*out.writeObject(curSet.returnObjects());
                                 out.flush();
-
+*/
                             } catch (ParseException e) {
                                 e.printStackTrace();
                             }
