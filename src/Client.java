@@ -2,6 +2,7 @@ import java.io.*;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.Scanner;
+import java.util.concurrent.ConcurrentSkipListSet;
 
 public class Client {
 
@@ -9,6 +10,8 @@ public class Client {
     public static final String HOST = "localhost";
 
     public static void main(String[] args){
+
+        ConcurrentSkipListSet<Citizens> citizenSet = new ConcurrentSkipListSet(new CitizenNameComporator());
 
         Socket socket = null;
 

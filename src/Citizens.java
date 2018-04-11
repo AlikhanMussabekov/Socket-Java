@@ -8,11 +8,20 @@ public class Citizens implements Serializable{
     private int age;
     DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
     private Date date = new Date();
-    private String city = "";
+    private String city = "Санкт-Петербург";
+
+    public Citizens(){
+
+    }
 
     public Citizens(String name, int age) {
         this.name = name;
         this.age = age;
+    }
+
+    public Citizens(String name, String age) {
+        this.name = name;
+        this.age = Integer.parseInt(age);
     }
 
     public String getDate() {
@@ -36,11 +45,15 @@ public class Citizens implements Serializable{
         this.age = age;
     }
 
+    public void setAge(String age) {
+        this.age = Integer.parseInt(age);
+    }
+
     public String getCity(){
         return city;
     }
 
     public void printInfo(){
-        System.out.printf("%s, %d, %s, %d \n", name, age, city, date);
+        System.out.printf("%s, %d, %s, %s \n", getName(), getAge(), getCity(), getDate());
     }
 }

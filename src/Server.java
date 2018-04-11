@@ -22,7 +22,7 @@ public class Server {
             }
         }));
 
-        ConcurrentSkipListSet citizenSet = new ConcurrentSkipListSet();
+        ConcurrentSkipListSet<Citizens> citizenSet = new ConcurrentSkipListSet(new CitizenNameComporator());
 
         ServerSocket serverSocket = null;
 
@@ -39,15 +39,18 @@ public class Server {
                 //ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream())
             ){
 
+
                 while (true) {
+
+                    System.out.println(1);
 
                     try {
                         Citizens citizen = (Citizens) in.readObject();
                         citizenSet.add(citizen);
 
-                        /*for(Citizens curCitizen: citizenSet){
-
-                        }*/
+                        for(Citizens curCitizen: citizenSet){
+                            curCitizen.printInfo();
+                        }
 
                         System.out.println(citizen.getName());
                     }catch(EOFException e){
