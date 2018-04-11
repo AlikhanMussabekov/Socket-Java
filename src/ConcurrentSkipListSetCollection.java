@@ -58,9 +58,11 @@ class ConcurrentSkipListSetCollection implements Serializable {
                 "\n" +
                 "----------------------");
 
-        for(Citizens type: types){
+        types.stream().forEach(Citizens -> System.out.println(Citizens.getName() + " " + Citizens.getAge()));
+
+        /*for(Citizens type: types){
             System.out.println(type.getName() + " " + type.getAge());
-        }
+        }*/
 
         System.out.println("----------------------" +
                 "\n" +

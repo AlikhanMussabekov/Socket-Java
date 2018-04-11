@@ -19,11 +19,11 @@ public class LabServer {
         Thread mainThread = Thread.currentThread();
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             System.out.println("Stoped...");
-            /*try {
+            try {
                 curSet.save();
             } catch (IOException e) {
                 e.printStackTrace();
-            }*/
+            }
             //System.out.println(11111111);
             try {
                 mainThread.join();

@@ -43,9 +43,11 @@ public class LabClient {
                     try{
                         mainSet = (ArrayList<Citizens>) in.readObject();
 
-                        for(Citizens curCitizen: mainSet){
+                        mainSet.stream().forEach(Citizens -> Citizens.printInfo());
+
+                        /*for(Citizens curCitizen: mainSet){
                             curCitizen.printInfo();
-                        }
+                        }*/
 
                     } catch (ClassNotFoundException | EOFException e) {
                         //e.printStackTrace();

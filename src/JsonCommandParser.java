@@ -12,7 +12,7 @@ public class JsonCommandParser {
         JSONParser parser = new JSONParser();
         JSONObject jsonCommand = null;
 
-        System.out.println(cmd + "--------" + jsonStringIN);
+        //System.out.println(cmd + "--------" + jsonStringIN);
 
         try {
              jsonCommand = (JSONObject) parser.parse(String.valueOf(jsonStringIN));
