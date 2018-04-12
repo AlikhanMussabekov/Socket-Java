@@ -1,7 +1,7 @@
+import org.json.simple.JSONObject;
+import org.json.simple.parser.*;
 import java.io.IOException;
 import java.util.Scanner;
-import org.json.simple.parser.*;
-import org.json.simple.JSONObject;
 
 public class JsonCommandParser {
     public void nextCommand(String cmd, ConcurrentSkipListSetCollection tree, String jsonStringIN) throws ParseException, IOException {
