@@ -14,7 +14,7 @@ public class CommandThread extends Thread{
 
     @Override
     public void run() {
-        System.out.println("TTTHHRREEAADDD");
+        System.out.println("new request");
         try {
             out.writeObject(citizens);
             out.flush();

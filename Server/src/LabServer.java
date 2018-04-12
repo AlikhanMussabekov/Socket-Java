@@ -34,12 +34,12 @@ public class LabServer {
             }
         }));
 
-        Scanner path = new Scanner(System.getenv("PATH"));
-
-        path.useDelimiter(":");
-
         String pathStr = null;
         String check = null;
+
+        /*Scanner path = new Scanner(System.getenv("PATH"));
+
+        path.useDelimiter(":");
 
         while(path.hasNext()){
 
@@ -49,7 +49,10 @@ public class LabServer {
                 check = pathStr;
 
         }
-        path.close();
+        path.close();*/
+
+        Scanner path = new Scanner(System.getenv("LAB"));
+        check = path.next();
 
         ServerSocket serverSocket = null;
 
