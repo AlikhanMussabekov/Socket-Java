@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class JsonCommandParser {
-    public void nextCommand(String cmd, ConcurrentSkipListSetCollection tree, String jsonStringIN) throws ParseException, IOException {
+    public void nextCommand(String cmd, ConcurrentSkipListSetCollection tree, String jsonStringIN) throws ParseException, IOException, InputException, CommandException {
 
         Scanner in = new Scanner(System.in);
         //String jsonStringIN = in.nextLine();
@@ -12,13 +12,14 @@ public class JsonCommandParser {
         JSONParser parser = new JSONParser();
         JSONObject jsonCommand = null;
 
-        System.out.println(cmd + "--------" + jsonStringIN);
+        System.out.println(cmd + " - " + jsonStringIN);
 
         try {
              jsonCommand = (JSONObject) parser.parse(String.valueOf(jsonStringIN));
         }catch (ParseException e){
             //e.printStackTrace();
-            System.out.println("Incorrect JSON format...");
+            //System.out.println("Incorrect JSON format...");
+            throw new InputException("Incorrect JSON format...");
         }
 
             //{"name": "vasyap", "age": 10}
@@ -45,7 +46,7 @@ public class JsonCommandParser {
                 break;
             default:
                 System.out.println("Invalid command...");
-                break;
+                throw new CommandException();
         }
     }
 }

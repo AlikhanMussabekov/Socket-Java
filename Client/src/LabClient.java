@@ -39,23 +39,32 @@ public class LabClient {
                     out.write(line.getBytes());
                     out.flush();
 
+                    Object input = in.readObject();
+
                     try{
-                        mainSet = (ArrayList<Citizens>) in.readObject();
+
+                        mainSet = (ArrayList<Citizens>) input;
 
                         mainSet.stream().forEach(Citizens -> Citizens.printInfo());
 
-                        /*for(Citizens curCitizen: mainSet){
-                            curCitizen.printInfo();
-                        }*/
-
-                    } catch (ClassNotFoundException | EOFException e) {
+                    } catch (ClassCastException e) {
                         //e.printStackTrace();
-                        System.out.println("Application stopped...");
-                        break;
+                        //System.out.println("Ошибка");
+
+                        String error = (String) input;
+
+                        if(error.equals("stop")){
+                            System.out.println(error);
+                            break;
+                        }
+                        else
+                            System.out.println(error);
                     }
 
                 }
 
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
             }
 
         } catch (IOException e) {

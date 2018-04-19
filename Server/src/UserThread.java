@@ -48,6 +48,7 @@ public class UserThread extends Thread {
                             cmdScanner = new Scanner(line);
                             cmdScanner.useDelimiter(" ");
                         }catch (StringIndexOutOfBoundsException e){
+                            System.out.println("11111");
                             continue;
                         }
 
@@ -60,24 +61,36 @@ public class UserThread extends Thread {
 
                             try {
                                 parser.nextCommand(curCmd, curSet, stringJson);
-                                curSet.writeElements();
+                                //curSet.writeElements();
 
-                                //new Thread (new CommandThread(curSet.returnObjects(),out)).start();
 
                                 out.writeObject(curSet.returnObjects());
                                 out.flush();
 
                             } catch (ParseException e) {
                                 e.printStackTrace();
+                            } catch (InputException e) {
+                                out.writeObject(e.info());
+                                out.flush();
+                            }catch (CommandException e){
+                                out.writeObject(e.info());
+                                out.flush();
                             }
 
                         }catch(NoSuchElementException e){
                             if (curCmd.equals("stop_app")){
-                                curSet.save();
                                 System.out.println("Application stopped...");
+                                curSet.save();
+                                out.writeObject("stop");
+                                out.flush();
+                                //Thread.currentThread().interrupt();
                                 break;
+                                //return;
+                                //break;
                             }else{
-                                continue;
+                                //System.out.println(22222);
+                                out.writeObject("JSON error...");
+                                out.flush();
                             }
                         }
 

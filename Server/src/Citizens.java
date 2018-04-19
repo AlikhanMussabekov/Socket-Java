@@ -9,6 +9,15 @@ public class Citizens implements Serializable{
     DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
     private Date date = new Date();
     private String city = "Санкт-Петербург";
+    private String err = "";
+
+    public String getErr() {
+        return err;
+    }
+
+    public void setErr(String err) {
+        this.err = err;
+    }
 
     public Citizens(){
 
@@ -54,6 +63,9 @@ public class Citizens implements Serializable{
     }
 
     public void printInfo(){
-        System.out.printf("%s, %d, %s, %s \n", getName(), getAge(), getCity(), getDate());
+        if(err!="")
+            System.out.printf("%s, %d, %s, %s \n", getName(), getAge(), getCity(), getDate());
+        else
+            System.out.println(err);
     }
 }
