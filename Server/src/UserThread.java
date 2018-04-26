@@ -37,6 +37,12 @@ public class UserThread extends Thread {
                 while (true) {
 
                     System.out.println("Server is running...");
+                    try {
+                        Thread.sleep(4000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
 
                     try {
 
@@ -48,7 +54,7 @@ public class UserThread extends Thread {
                             cmdScanner = new Scanner(line);
                             cmdScanner.useDelimiter(" ");
                         }catch (StringIndexOutOfBoundsException e){
-                            System.out.println("11111");
+                            //System.out.println("11111");
                             continue;
                         }
 

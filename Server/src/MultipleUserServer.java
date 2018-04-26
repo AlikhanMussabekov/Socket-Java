@@ -19,7 +19,7 @@ public class MultipleUserServer {
         String pathStr = null;
         String check = null;
 
-        /*Scanner path = new Scanner(System.getenv("PATH"));
+       /* Scanner path = new Scanner(System.getenv("PATH"));
 
         path.useDelimiter(":");
 
@@ -31,8 +31,8 @@ public class MultipleUserServer {
                 check = pathStr;
 
         }
-        path.close();*/
-
+        path.close();
+*/
 
         Scanner path = new Scanner(System.getenv("LAB"));
         check = path.next();

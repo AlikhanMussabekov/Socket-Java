@@ -1,9 +1,8 @@
-
 import java.io.EOFException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.OutputStream;
-import java.net.Socket;
+import java.net.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -20,58 +19,71 @@ public class LabClient {
 
         Scanner consoleInput = new Scanner(System.in);
 
-        try{
-            socket = new Socket(HOST,PORT);
+        while(true) {
 
-            try(OutputStream out = socket.getOutputStream();
-                ObjectInputStream in = new ObjectInputStream(socket.getInputStream())){
+            try {
+                socket = new Socket(HOST, PORT);
 
-                String line;
+                if (socket.isConnected()) {
 
-                while(true){
+                    try (OutputStream out = socket.getOutputStream();
+                         ObjectInputStream in = new ObjectInputStream(socket.getInputStream())) {
 
-                    //System.out.println(1);
+                        String line;
 
-                    line = consoleInput.nextLine();
+                        //System.out.println(1);
 
-                    //System.out.println(2);
+                        line = consoleInput.nextLine();
 
-                    out.write(line.getBytes());
-                    out.flush();
+                        //System.out.println(2);
 
-                    Object input = in.readObject();
+                        out.write(line.getBytes());
+                        out.flush();
 
-                    try{
+                        Object input = in.readObject();
 
-                        mainSet = (ArrayList<Citizens>) input;
+                        try {
 
-                        mainSet.stream().forEach(Citizens -> Citizens.printInfo());
+                            mainSet = (ArrayList<Citizens>) input;
 
-                    } catch (ClassCastException e) {
-                        //e.printStackTrace();
-                        //System.out.println("Ошибка");
+                            mainSet.stream().forEach(Citizens -> Citizens.printInfo());
 
-                        String error = (String) input;
+                        } catch (ClassCastException e) {
+                            //e.printStackTrace();
+                            //System.out.println("Ошибка");
 
-                        if(error.equals("stop")){
-                            System.out.println(error);
-                            break;
+                            String error = (String) input;
+
+                            if (error.equals("stop")) {
+                                System.out.println(error);
+                                break;
+                            } else
+                                System.out.println(error);
+
                         }
-                        else
-                            System.out.println(error);
-                    }
 
+                    } catch (ClassNotFoundException e) {
+                        e.printStackTrace();
+                    }catch (EOFException e){
+
+                    }catch (SocketException e){
+
+                    }
+                }
+            } catch (ConnectException exc){
+
+                System.out.println("Server is not responding...\n"
+                + "Please wait...");
+
+                try {
+                    Thread.sleep(4000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
 
-            } catch (ClassNotFoundException e) {
+            } catch (IOException e) {
                 e.printStackTrace();
             }
-
-        } catch (IOException e) {
-            e.printStackTrace();
         }
-
-
-
     }
 }
