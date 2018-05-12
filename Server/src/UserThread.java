@@ -34,7 +34,7 @@ public class UserThread extends Thread {
                 ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream())
             ){
 
-                while (true) {
+                if(!socket.isClosed()) {
 
                     System.out.println("Server is running...");
                     try {
@@ -55,7 +55,7 @@ public class UserThread extends Thread {
                             cmdScanner.useDelimiter(" ");
                         }catch (StringIndexOutOfBoundsException e){
                             //System.out.println("11111");
-                            continue;
+                            //continue;
                         }
 
 
@@ -89,9 +89,6 @@ public class UserThread extends Thread {
                                 curSet.save();
                                 out.writeObject("stop");
                                 out.flush();
-                                //Thread.currentThread().interrupt();
-                                break;
-                                //return;
                                 //break;
                             }else{
                                 //System.out.println(22222);
@@ -100,9 +97,8 @@ public class UserThread extends Thread {
                             }
                         }
 
-                    }catch(EOFException e){
+                    }catch(EOFException e) {
                         System.out.println("EOFException");
-                        break;
                     }
                 }
             }
@@ -110,7 +106,11 @@ public class UserThread extends Thread {
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
-
+            try {
+                socket.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

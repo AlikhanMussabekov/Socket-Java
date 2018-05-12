@@ -46,7 +46,7 @@ public class LabClient {
 
                             mainSet = (ArrayList<Citizens>) input;
 
-                            mainSet.stream().forEach(Citizens -> Citizens.printInfo());
+                            mainSet.forEach(Citizens -> Citizens.printInfo());
 
                         } catch (ClassCastException e) {
                             //e.printStackTrace();
